@@ -3,6 +3,7 @@ using Library.Models;
 using Library.Services;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Library.Controllers
 {
@@ -102,6 +103,7 @@ namespace Library.Controllers
             return Ok(publishingHouses);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<PublishingHouseDTO>> Add(PublishingHouseInsertDTO publishingHouseInsertDTO)
         {
@@ -121,6 +123,7 @@ namespace Library.Controllers
             return CreatedAtAction(nameof(GetById), new { id = publishingHouseDTO.IdPublishingHouse }, publishingHouseDTO);
         }
 
+        [Authorize]
         [HttpPut("{id:int}")]
         public async Task<ActionResult<PublishingHouseDTO>> Update(int id, PublishingHouseUpdateDTO publishingHouseUpdateDTO)
         {
@@ -140,6 +143,7 @@ namespace Library.Controllers
             return publishingHouseDTO == null ? NotFound() : Ok(publishingHouseDTO);
         }
 
+        [Authorize]
         [HttpDelete("{id:int}")]
         public async Task<ActionResult<PublishingHouseDTO>> Delete(int id)
         {

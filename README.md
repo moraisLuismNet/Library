@@ -2,6 +2,7 @@
 ASP.NET Core Web API Biblioteca
 
 ![Library](img/1.png)
+![Library](img/2.png)
 
 
 
@@ -13,8 +14,8 @@ ASP.NET Core Web API Biblioteca
   "ConnectionStrings": {
         "Connection": "Server=?;Database=Library;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True",
   },
-  "ClaveEncriptacion": "",
-    "ClaveJWT": "",
+  "EncryptionKey": "",
+  "JWTKey": "",
   "Logging": {
     "LogLevel": {
       "Default": "Information",

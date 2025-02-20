@@ -10,8 +10,8 @@ namespace Library.Models
         public DbSet<Author> Authors { get; set; }
         public DbSet<PublishingHouse> PublishingHouses { get; set; }
         public DbSet<Book> Books { get; set; }
-
         public DbSet<Action> Actions { get; set; }
+        public virtual DbSet<User> Users { get; set; }
 
     }
 }

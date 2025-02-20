@@ -3,6 +3,7 @@ using Library.Models;
 using Library.Services;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Library.Controllers
 {
@@ -52,7 +53,7 @@ namespace Library.Controllers
         }
 
         /* Get all books grouped by their Out of Print property. For each group, get how many are
-	out of print and how many are not out of print */
+	    out of print and how many are not out of print */
         [HttpGet("groupByDiscontinued")]
         public async Task<ActionResult<IEnumerable<BookGroupDTO>>> GetBooksGroupedByDiscontinued()
         {
@@ -126,6 +127,7 @@ namespace Library.Controllers
             return Ok(books);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<BookDTO>> Add([FromForm] BookInsertDTO bookInsertDTO)
         {
@@ -139,6 +141,7 @@ namespace Library.Controllers
             return Ok(newBook);
         }
 
+        [Authorize]
         [HttpPut("{id:int}")]
         public async Task<IActionResult> Update(int id, [FromForm] BookUpdateDTO dtoBook)
         {
@@ -157,6 +160,7 @@ namespace Library.Controllers
             return Ok(bookUpdated);
         }
 
+        [Authorize]
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> Delete([FromRoute] int id)
         {

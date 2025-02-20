@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Library.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Library.Controllers
 {
@@ -15,7 +16,7 @@ namespace Library.Controllers
             _context = context;
         }
 
-        // GET: api/Actions
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult> GetActions()
         {
