@@ -11,5 +11,7 @@ namespace Library.Models
         public DbSet<PublishingHouse> PublishingHouses { get; set; }
         public DbSet<Book> Books { get; set; }
 
+        public DbSet<Action> Actions { get; set; }
+
     }
 }

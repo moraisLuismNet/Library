@@ -1,4 +1,5 @@
 using FluentValidation;
+using Library.AutoMappers;
 using Library.DTOs;
 using Library.Models;
 using Library.Repository;
@@ -27,11 +28,6 @@ options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IAuthorService, AuthorService>();
-builder.Services.AddScoped<IPublishingHouseService, PublishingHouseService>();
-builder.Services.AddScoped<IBookService, BookService>();
-builder.Services.AddTransient<IManagerFiles, ManagerFiles>();
-
 // Validators
 builder.Services.AddScoped<IValidator<AuthorInsertDTO>, AuthorInsertValidator>();
 builder.Services.AddScoped<IValidator<AuthorUpdateDTO>, AuthorUpdateValidator>();
@@ -42,11 +38,28 @@ builder.Services.AddScoped<IValidator<BookUpdateDTO>, BookUpdateValidator>();
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddTransient<IManagerFiles, ManagerFiles>();
+builder.Services.AddTransient<ActionsService>();
+
+builder.Services.AddScoped<IAuthorService, AuthorService>();
+builder.Services.AddScoped<IPublishingHouseService, PublishingHouseService>();
+builder.Services.AddScoped<IBookService, BookService>();
+builder.Services.AddTransient<IManagerFiles, ManagerFiles>();
 
 // Repository
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
 builder.Services.AddScoped<IPublishingHouseRepository, PublishingHouseRepository>();
+
+// Mappers
+builder.Services.AddAutoMapper(typeof(MappingProfile));
+
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+    });
+});
 
 var app = builder.Build();
 
@@ -60,6 +73,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseCors();
 
 app.MapControllers();
 
