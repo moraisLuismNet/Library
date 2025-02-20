@@ -1,6 +1,7 @@
 using FluentValidation;
 using Library.DTOs;
 using Library.Models;
+using Library.Repository;
 using Library.Services;
 using Library.Validators;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +27,11 @@ options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<IAuthorService, AuthorService>();
+builder.Services.AddScoped<IPublishingHouseService, PublishingHouseService>();
+builder.Services.AddScoped<IBookService, BookService>();
+builder.Services.AddTransient<IManagerFiles, ManagerFiles>();
+
 // Validators
 builder.Services.AddScoped<IValidator<AuthorInsertDTO>, AuthorInsertValidator>();
 builder.Services.AddScoped<IValidator<AuthorUpdateDTO>, AuthorUpdateValidator>();
@@ -36,6 +42,11 @@ builder.Services.AddScoped<IValidator<BookUpdateDTO>, BookUpdateValidator>();
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddTransient<IManagerFiles, ManagerFiles>();
+
+// Repository
+builder.Services.AddScoped<IBookRepository, BookRepository>();
+builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
+builder.Services.AddScoped<IPublishingHouseRepository, PublishingHouseRepository>();
 
 var app = builder.Build();
 

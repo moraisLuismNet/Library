@@ -1,6 +1,6 @@
 ﻿namespace Library.DTOs
 {
-    public class PublishingHouseBookAuthor
+    public class PublishingHouseBookAuthorDTO
     {
         public string Name { get; set; }
         public List<BookItemDTO> Books { get; set; }
