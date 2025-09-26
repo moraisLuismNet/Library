@@ -1,6 +1,6 @@
 ## Library
 
-**Library** is an ASP.NET Core Web API that manages library-related information, including authors, books, and publishing houses, as well as handling user authentication and logging actions performed on the system.
+**Library** is an ASP.NET Core 8.0 Web API that manages library-related information, including authors, books, and publishing houses, as well as handling user authentication and logging actions performed on the system. It uses SQL Server, Entity Framework Core and JWT for authentication. 
 
 ![Library](img/UML.png)
 
